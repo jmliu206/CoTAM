@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+runs/
+runs_*/
+outputs/
+checkpoints/
+*.pth
+*.pth.tar
+*.pt
+
+.DS_Store
+.env
+wandb/

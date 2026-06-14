@@ -1,0 +1,8 @@
+einops
+numpy
+Pillow
+PyYAML
+pytest
+torch
+torchvision
+tqdm

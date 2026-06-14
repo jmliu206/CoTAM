@@ -1,0 +1,61 @@
+experiment:
+  name: cotam_elic_clip_adapter
+  output_dir: ./runs
+  seed: 42
+  use_wandb: false
+
+distributed:
+  enabled: auto
+  backend: nccl
+
+data:
+  train_type: cc3m
+  train_path: ./data/cc3m
+  train_split: train
+  val_type: coco
+  val_path: ./data/coco
+  val_split: val2017
+  image_size: 384
+  context_length: 77
+  batch_size: 8
+  val_batch_size: 32
+  num_workers: 4
+
+codec:
+  name: elic_vbr
+  checkpoint:
+  freeze: true
+  n: 192
+  m: 320
+  levels: 10
+
+checkpoint:
+  strict_codec: true
+  strict_adapter: true
+
+clip:
+  model_name: ViT-L/14@336px
+  input_size: 336
+
+adapter:
+  in_features: 320
+  out_features: 1024
+  input_resolution: 384
+  patch_size: 16
+  transformer_layers: 1
+  learning_rate: 5.0e-4
+
+loss:
+  total_weight: 11.52
+  layer1_weight: 0.1
+  other_layer_weight: 0.1
+  warmup_epochs: 5
+  mode: low_then_low_high
+  use_decode_prior: true
+
+mask:
+  provider: random
+  levels: 10
+  patch_size: 16
+  modes: [uniform, patch, gradient]
+  seed: 42

@@ -1,0 +1,20 @@
+experiment:
+  name: base_codec_elic
+  output_dir: ./runs
+  seed: 42
+
+data:
+  dataset_path: ./data/images
+  train_split: train
+  val_split: val
+  image_size: 256
+  batch_size: 4
+  num_workers: 4
+
+codec:
+  name: elic
+  n: 192
+  m: 320
+  lmbda: 0.01
+  learning_rate: 1.0e-4
+  aux_learning_rate: 1.0e-3

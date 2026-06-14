@@ -1,0 +1,54 @@
+experiment:
+  name: cotam_dcae_clip_adapter
+  output_dir: ./runs
+  seed: 42
+
+distributed:
+  enabled: auto
+  backend: nccl
+
+data:
+  train_path: ./data/cc3m
+  val_path: ./data/coco
+  image_size: 384
+  context_length: 77
+  batch_size: 8
+  val_batch_size: 32
+  num_workers: 4
+
+codec:
+  name: dcae
+  checkpoint:
+  freeze: true
+  m: 320
+
+checkpoint:
+  strict_codec: true
+  strict_adapter: true
+
+clip:
+  model_name: ViT-L/14@336px
+  input_size: 336
+
+adapter:
+  in_features: 320
+  out_features: 1024
+  input_resolution: 384
+  patch_size: 16
+  transformer_layers: 1
+  learning_rate: 5.0e-4
+
+loss:
+  total_weight: 11.52
+  layer1_weight: 0.1
+  other_layer_weight: 0.1
+  warmup_epochs: 5
+  mode: low_then_low_high
+  use_decode_prior: true
+
+mask:
+  provider: random
+  levels: 10
+  patch_size: 16
+  modes: [uniform, patch, gradient]
+  seed: 42
