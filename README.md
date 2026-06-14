@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2509.24258">Paper</a> |
+  <a href="https://arxiv.org/abs/2509.24258">Paper</a>
 </p>
 
 ## Overview
